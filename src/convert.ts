@@ -231,3 +231,21 @@ export function shallowClone<T>(obj: T): T {
 
     return extend(false, destination, obj);
 }
+
+export function stripNilProperties(obj?: any): any {
+    if (isNil(obj)) {
+        return obj;
+    }
+
+    const ret: any = {};
+
+    Object.keys(obj).forEach((key) => {
+        if (isNil(obj[key])) {
+            return;
+        }
+
+        ret[key] = obj[key];
+    });
+
+    return ret;
+}

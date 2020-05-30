@@ -19,6 +19,14 @@ export function isNil(obj: any): obj is null | undefined {
     return obj === null || obj === undefined;
 }
 
+export function isNull(obj: any): obj is null {
+    return obj === null ;
+}
+
+export function isUndefined(obj: any): obj is undefined {
+    return obj === undefined || typeof obj === 'undefined' ;
+}
+
 export function isNilOrFalse(obj: any): obj is null | undefined | false {
     return isNil(obj) || obj === false;
 }
