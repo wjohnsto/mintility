@@ -13,10 +13,19 @@ import {
     isNotEmpty,
     isObject,
     isRegExp,
+    isUndefined,
 } from './assert';
 
 export function identity<T = any>(value?: T): T {
     return value as T;
+}
+
+export function undefinedToNull(value: any) {
+    if (isUndefined(value)) {
+        return null;
+    }
+
+    return value;
 }
 
 /**
