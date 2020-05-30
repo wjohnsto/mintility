@@ -5,7 +5,8 @@ export default {
     input: 'obj/index.js',
     output: {
         file: 'index.js',
-        format: 'cjs'
+        format: 'cjs',
+        exports: 'named',
     },
     plugins: [resolve(), terser({
         module: true
