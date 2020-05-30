@@ -112,7 +112,7 @@ export async function filterAsync<T>(
  * @param {number} [ms=1000]
  * @returns {Promise<void>}
  */
-export function wait(ms = 200) {
+export function wait(ms: number = 200): Promise<void> {
     return new Promise((resolve) => {
         setTimeout(resolve, ms);
     });
@@ -125,7 +125,7 @@ export function wait(ms = 200) {
  * @param {string} windowValue
  * @returns {Promise<any>}
  */
-async function waitFor(windowValue: string) {
+async function waitFor(windowValue: string): Promise<any> {
     while (!(window as any)[windowValue]) {
         // eslint-disable-next-line
         await wait();
