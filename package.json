@@ -1,5 +1,5 @@
 {
-  "name": "some-utils",
+  "name": "mintility",
   "version": "0.0.1",
   "description": "A small library of utility functions",
   "main": "index.js",
