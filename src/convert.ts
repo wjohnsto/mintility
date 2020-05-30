@@ -258,3 +258,27 @@ export function stripNilProperties(obj?: any): any {
 
     return ret;
 }
+
+export function secondsToMillis(seconds = 1) {
+    return seconds * 1000;
+}
+
+export function minutesToMillis(minutes = 1) {
+    return minutes * secondsToMillis(60);
+}
+
+export function hoursToMillis(hours = 1) {
+    return hours * minutesToMillis(60);
+}
+
+export function daysToMillis(days = 1) {
+    return days * hoursToMillis(24);
+}
+
+export function yearsToMillis(years = 1) {
+    return years * daysToMillis(365);
+}
+
+export function weeksToMillis(weeks = 1) {
+    return weeks * daysToMillis(7);
+}
