@@ -2,7 +2,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import { terser } from 'rollup-plugin-terser';
 
 export default {
-    input: 'obj/index.js',
+    input: 'dist/index.js',
     output: {
         file: 'index.js',
         format: 'cjs',

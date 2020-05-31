@@ -6,7 +6,7 @@
   "types": "./typings/index.d.ts",
   "scripts": {
     "build": "run-s clean ts && rollup --config",
-    "clean": "rimraf obj typings index.js",
+    "clean": "rimraf dist typings index.js",
     "prepublish": "run-s build",
     "ts": "tsc -p .",
     "test": "echo \"Error: no test specified\" && exit 1"

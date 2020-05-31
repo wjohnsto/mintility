@@ -1,7 +1,12 @@
 /**
  * This file provides a simple implementation of a cache using SessionStorage or LocalStorage
  */
-import { isDate, isFiniteNumber, isFunction, isNil, isString } from './assert';
+
+import isFunction from "./isFunction";
+import isNil from "./isNil";
+import isString from "./isString";
+import isFiniteNumber from "./isFiniteNumber";
+import isDate from "./isDate";
 
 /**
  * The options for the StorageCache
@@ -76,7 +81,7 @@ export class StorageCache {
    * @param {string} key
    * @memberof StorageCache
    */
-  public remove(key: string) {
+  public delete(key: string) {
     this.storage.removeItem(this.getKey(key));
   }
 
@@ -129,7 +134,7 @@ export class StorageCache {
    * @returns
    * @memberof StorageCache
    */
-  public put(key: string, value: any, expires?: Date) {
+  public set(key: string, value: any, expires?: Date) {
     let timestamp = -1;
     const { expiration } = this.options;
 
@@ -156,3 +161,5 @@ export class StorageCache {
     return value;
   }
 }
+
+export default StorageCache;
