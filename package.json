@@ -1,6 +1,6 @@
 {
   "name": "mintility",
-  "version": "0.0.14",
+  "version": "0.1.0",
   "description": "A small library of utility functions",
   "main": "index.js",
   "types": "./typings/index.d.ts",
