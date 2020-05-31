@@ -1,4 +1,4 @@
-import wait from "./wait";
+import wait from './wait';
 
 /**
  * Similar to wait, but waits for a specific value to exist on the value of "this". Useful for loading
@@ -9,13 +9,11 @@ import wait from "./wait";
  * @returns {Promise<any>} When the value is found, it will be returned
  */
 export async function waitFor(this: any, value: string): Promise<any> {
-    let win = this;
-
-    while (!(win as any)[value]) {
+    while (!this[value]) {
         await wait(50);
     }
 
-    return (win as any)[value];
+    return this[value];
 }
 
 export default waitFor;

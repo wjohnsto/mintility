@@ -1,6 +1,6 @@
-import isObject from "./isObject";
-import { objString, TypeString } from "./helpers";
-import isFunction from "./isFunction";
+import { objString, TypeString } from './helpers';
+import isFunction from './isFunction';
+import isObject from './isObject';
 
 /**
  * Checks if a value is a Promise, meaning it is either an instance of the built-in Promise class,
@@ -13,7 +13,8 @@ import isFunction from "./isFunction";
 export function isPromise(value: any): value is Promise<any> {
     return (
         isObject(value) &&
-        (objString(value) === TypeString.PROMISE || (isFunction(value.then) && isFunction(value.catch)))
+        (objString(value) === TypeString.PROMISE ||
+            (isFunction(value.then) && isFunction(value.catch)))
     );
 }
 

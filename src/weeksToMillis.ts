@@ -1,4 +1,4 @@
-import { daysToMillis } from "./daysToMillis";
+import { daysToMillis } from './daysToMillis';
 
 /**
  * Converts weeks into milliseconds

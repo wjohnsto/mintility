@@ -1,8 +1,8 @@
-import isNil from "./isNil";
-import isBoolean from "./isBoolean";
-import isFiniteNumber from "./isFiniteNumber";
-import isBigInt from "./isBigInt";
-import isSymbol from "./isSymbol";
+import isBigInt from './isBigInt';
+import isBoolean from './isBoolean';
+import isFiniteNumber from './isFiniteNumber';
+import isNil from './isNil';
+import isSymbol from './isSymbol';
 
 /**
  * Checks if a value is a primitive type
@@ -11,8 +11,16 @@ import isSymbol from "./isSymbol";
  * @param {*} value
  * @returns {(value is string | boolean | number | bigint | symbol | null | undefined)}
  */
-export function isPrimitive(value: any): value is string | boolean | number | bigint | symbol | null | undefined {
-    return isNil(value) || isBoolean(value) || isFiniteNumber(value) || isBigInt(value) || isSymbol(value);
+export function isPrimitive(
+    value: any,
+): value is string | boolean | number | bigint | symbol | null | undefined {
+    return (
+        isNil(value) ||
+        isBoolean(value) ||
+        isFiniteNumber(value) ||
+        isBigInt(value) ||
+        isSymbol(value)
+    );
 }
 
 export default isPrimitive;

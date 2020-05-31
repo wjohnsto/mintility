@@ -1,5 +1,5 @@
-import isNil from "./isNil";
-import isArray from "./isArray";
+import isArray from './isArray';
+import isNil from './isNil';
 
 /**
  * Attempts to convert a value to a number. In JavaScript Number(null) will give you 0, while Number(undefined) will

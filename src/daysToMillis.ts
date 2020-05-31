@@ -1,4 +1,4 @@
-import { hoursToMillis } from "./hoursToMillis";
+import { hoursToMillis } from './hoursToMillis';
 
 /**
  * Converts days into milliseconds

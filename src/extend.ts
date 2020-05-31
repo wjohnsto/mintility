@@ -1,14 +1,19 @@
-import isNil from "./isNil";
-import forEach from "./forEach";
-import isObject from "./isObject";
-import isArray from "./isArray";
-import isDate from "./isDate";
-import isRegExp from "./isRegExp";
-import isNode from "./isNode";
-import isFile from "./isFile";
-import isArrayNotEmpty from "./isArrayNotEmpty";
+import forEach from './forEach';
+import isArray from './isArray';
+import isArrayNotEmpty from './isArrayNotEmpty';
+import isDate from './isDate';
+import isFile from './isFile';
+import isNil from './isNil';
+import isNode from './isNode';
+import isObject from './isObject';
+import isRegExp from './isRegExp';
 
-function safeExtend(deep: boolean, destination: any, sources: any[], marked: WeakMap<any, any> = new WeakMap()) {
+function safeExtend(
+    deep: boolean,
+    destination: any,
+    sources: any[],
+    marked: WeakMap<any, any> = new WeakMap(),
+) {
     let keys: string[];
     let property: any;
 

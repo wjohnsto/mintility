@@ -16,4 +16,6 @@ export const enum TypeString {
     WEAKSET = '[object WeakSet]',
 }
 
-export const objString = Object.prototype.toString.call.bind(Object.prototype.toString);
+export const objString = Object.prototype.toString.call.bind(
+    Object.prototype.toString,
+);

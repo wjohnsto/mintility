@@ -1,6 +1,6 @@
-import isError from "./isError";
-import isObject from "./isObject";
-import isNil from "./isNil";
+import isArrayLike from './isArrayLike';
+import isError from './isError';
+import isObject from './isObject';
 
 /**
  * Checks if a value is Error-like in that it has a message property
@@ -9,9 +9,10 @@ import isNil from "./isNil";
  * @param {*} value
  * @returns {(obj is Error | { message: any; })}
  */
-export function isErrorLike(value: any): value is Error | { message: any; } {
-    return isError(value) ||
-        (isObject(value) && !isNil(value.message));
+export function isErrorLike(
+    value: any,
+): value is Error | { message: ArrayLike<any> } {
+    return isError(value) || (isObject(value) && isArrayLike(value.message));
 }
 
 export default isErrorLike;

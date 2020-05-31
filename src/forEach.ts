@@ -1,7 +1,7 @@
-import isNil from "./isNil";
-import isObject from "./isObject";
-import isArrayLike from "./isArrayLike";
-import isFunction from "./isFunction";
+import isArrayLike from './isArrayLike';
+import isFunction from './isFunction';
+import isNil from './isNil';
+import isObject from './isObject';
 
 /**
  * Similar to Array.prototype.forEach

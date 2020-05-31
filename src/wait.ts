@@ -4,7 +4,7 @@
  * @param {number} [ms=1000]
  * @returns {Promise<void>}
  */
-export function wait(ms: number = 200): Promise<void> {
+export function wait(ms = 200): Promise<void> {
     return new Promise((resolve) => {
         setTimeout(resolve, ms);
     });

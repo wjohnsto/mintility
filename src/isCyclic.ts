@@ -1,5 +1,5 @@
-import isObject from "./isObject";
-import isArray from "./isArray";
+import isArray from './isArray';
+import isObject from './isObject';
 
 /**
  * Determines if a value contains a circular reference. Useful for knowing if you
@@ -25,10 +25,12 @@ export function isCyclic(value: any): boolean {
                 }
             }
         } else if (isArray(obj)) {
-            for (const i in obj) {
-                if (detectCycle(obj[i])) {
-                    return true;
-                }
+            if (
+                obj.some((value) => {
+                    return detectCycle(value);
+                })
+            ) {
+                return true;
             }
         }
 

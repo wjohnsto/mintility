@@ -1,5 +1,5 @@
-import isArray from "./isArray";
-import extend from "./extend";
+import extend from './extend';
+import isArray from './isArray';
 
 /**
  * Creates a shallow copy of an object

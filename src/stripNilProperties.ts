@@ -1,4 +1,4 @@
-import isNil from "./isNil";
+import isNil from './isNil';
 
 /**
  * Removes any properties from an object that are null or undefined

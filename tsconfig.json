@@ -10,7 +10,6 @@
         "noUnusedLocals": true,
         "outDir": "dist",
         "declaration": true,
-        "declarationDir": "typings"
     },
     "include": [
         "./src/**/*"

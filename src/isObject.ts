@@ -3,9 +3,9 @@
  *
  * @export
  * @param {*} value
- * @returns {(obj is Object)}
+ * @returns {(obj is Record<string, any>)}
  */
-export function isObject(value: any): value is Object {
+export function isObject(value: any): value is Record<string, any> {
     return value != null && typeof value === 'object';
 }
 

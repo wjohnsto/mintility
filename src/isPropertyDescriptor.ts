@@ -1,5 +1,5 @@
-import isObject from "./isObject";
-import isFunction from "./isFunction";
+import isFunction from './isFunction';
+import isObject from './isObject';
 
 /**
  * Checks if a value is a PropertyDescriptor
@@ -10,9 +10,7 @@ import isFunction from "./isFunction";
  * @returns {(a is typeof b)}
  */
 export function isPropertyDescriptor(value: any): value is PropertyDescriptor {
-    return isObject(value) && (
-        isFunction(value.get) || isFunction(value.set)
-    );
+    return isObject(value) && (isFunction(value.get) || isFunction(value.set));
 }
 
 export default isPropertyDescriptor;

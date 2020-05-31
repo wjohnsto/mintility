@@ -1,4 +1,4 @@
-import isObject from "./isObject";
+import isObject from './isObject';
 
 /**
  * Checks if a value is an object with at least one key. You might ask "Why no isEmpty?" This is
@@ -12,7 +12,7 @@ import isObject from "./isObject";
  * @param {*} value
  * @returns {(value is { [key: string]: any; })}
  */
-export function isObjectNotEmpty(value: any): value is { [key: string]: any; } {
+export function isObjectNotEmpty(value: any): value is { [key: string]: any } {
     return isObject(value) && Object.keys(value).length > 0;
 }
 

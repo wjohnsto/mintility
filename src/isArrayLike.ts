@@ -1,7 +1,7 @@
-import isObject from "./isObject";
-import isArray from "./isArray";
-import isString from "./isString";
-import isFiniteNumber from "./isFiniteNumber";
+import isArray from './isArray';
+import isFiniteNumber from './isFiniteNumber';
+import isObject from './isObject';
+import isString from './isString';
 
 /**
  * Checks if a value is Array-like
@@ -14,7 +14,7 @@ export function isArrayLike(value: any): value is ArrayLike<any> {
     return (
         isArray(value) ||
         isString(value) ||
-        (isObject(value) && isFiniteNumber((value as any).length))
+        (isObject(value) && isFiniteNumber(value.length))
     );
 }
 

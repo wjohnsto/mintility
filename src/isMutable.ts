@@ -1,4 +1,4 @@
-import isImmutable from "./isImmutable";
+import isImmutable from './isImmutable';
 
 /**
  * Checks if a value is a mutable type

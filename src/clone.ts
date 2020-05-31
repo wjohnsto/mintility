@@ -1,12 +1,12 @@
-import isNil from "./isNil";
-import isObject from "./isObject";
-import isDate from "./isDate";
-import isRegExp from "./isRegExp";
-import isNode from "./isNode";
-import isFile from "./isFile";
-import isError from "./isError";
-import isArray from "./isArray";
-import extend from "./extend";
+import extend from './extend';
+import isArray from './isArray';
+import isDate from './isDate';
+import isError from './isError';
+import isFile from './isFile';
+import isNil from './isNil';
+import isNode from './isNode';
+import isObject from './isObject';
+import isRegExp from './isRegExp';
 
 /**
  * Creates a deep copy of an object. Be careful, this can be an expensive call and may not

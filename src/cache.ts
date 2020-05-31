@@ -2,11 +2,11 @@
  * This file provides a simple implementation of a cache using SessionStorage or LocalStorage
  */
 
-import isFunction from "./isFunction";
-import isNil from "./isNil";
-import isString from "./isString";
-import isFiniteNumber from "./isFiniteNumber";
-import isDate from "./isDate";
+import isDate from './isDate';
+import isFiniteNumber from './isFiniteNumber';
+import isFunction from './isFunction';
+import isNil from './isNil';
+import isString from './isString';
 
 /**
  * The options for the StorageCache
@@ -15,21 +15,21 @@ import isDate from "./isDate";
  * @interface StorageCacheOptions
  */
 export interface StorageCacheOptions {
-  /**
-   * The base key used to prepend to cache keys
-   */
-  key: string | ((obj: any) => string);
+    /**
+     * The base key used to prepend to cache keys
+     */
+    key: string | ((obj: any) => string);
 
-  /**
-   * What Storage to use, defaults to SessionStorage. You can use any object that fulfills the
-   * Storage interface.
-   */
-  storage?: Storage;
+    /**
+     * What Storage to use, defaults to SessionStorage. You can use any object that fulfills the
+     * Storage interface.
+     */
+    storage?: Storage;
 
-  /**
-   * A number of miliseconds to set as the default expiration of cache items. Defaults to 30 seconds.
-   */
-  expiration?: number;
+    /**
+     * A number of miliseconds to set as the default expiration of cache items. Defaults to 30 seconds.
+     */
+    expiration?: number;
 }
 
 /**
@@ -40,126 +40,127 @@ export interface StorageCacheOptions {
  * @class StorageCache
  */
 export class StorageCache {
-  protected storage: Storage;
+    protected storage: Storage;
 
-  protected getKey: (obj: string) => string;
+    protected getKey: (obj: string) => string;
 
-  private options: StorageCacheOptions;
+    private options: StorageCacheOptions;
 
-  constructor(options: StorageCacheOptions) {
-    this.options = options;
-    this.storage = options.storage || window.sessionStorage;
+    constructor(options: StorageCacheOptions) {
+        this.options = options;
+        this.storage = options.storage || window.sessionStorage;
 
-    if (isFunction(options.key)) {
-      this.getKey = options.key;
-    } else {
-      this.getKey = (key: string) => {
-        return `${options.key as string}${key}`;
-      };
-    }
+        if (isFunction(options.key)) {
+            this.getKey = options.key;
+        } else {
+            this.getKey = (key: string) => {
+                return `${options.key as string}${key}`;
+            };
+        }
 
-    if (!options.expiration) {
-      // eslint-disable-next-line
+        if (!options.expiration) {
+            // eslint-disable-next-line
       options.expiration = 1000 * 30;
-    }
-  }
-
-  /**
-   * Chack if a key is in the cache
-   *
-   * @param {string} key
-   * @returns {boolean}
-   * @memberof StorageCache
-   */
-  public exists(key: string): boolean {
-    return !isNil(this.get(key));
-  }
-
-  /**
-   * Remove a key from the cache
-   *
-   * @param {string} key
-   * @memberof StorageCache
-   */
-  public delete(key: string) {
-    this.storage.removeItem(this.getKey(key));
-  }
-
-  /**
-   * Get a value out of the cache
-   *
-   * @template T
-   * @param {string} key
-   * @param {((value?: T) => T | undefined)} [validator=this.validator]
-   * @returns {(T | undefined)}
-   * @memberof StorageCache
-   */
-  public get<T = any>(
-    key: string,
-    validator: (value?: T) => T | undefined = this.validator,
-  ): T | undefined {
-    const cacheKey = this.getKey(key);
-    const cacheItem = this.storage.getItem(cacheKey);
-
-    if (!isString(cacheItem)) {
-      return;
+        }
     }
 
-    try {
-      const { expires, value }: { expires: number; value: T } = JSON.parse(
-        cacheItem,
-      );
+    /**
+     * Chack if a key is in the cache
+     *
+     * @param {string} key
+     * @returns {boolean}
+     * @memberof StorageCache
+     */
+    public exists(key: string): boolean {
+        return !isNil(this.get(key));
+    }
 
-      if (!isFiniteNumber(expires)) {
-        return;
-      }
+    /**
+     * Remove a key from the cache
+     *
+     * @param {string} key
+     * @memberof StorageCache
+     */
+    public delete(key: string) {
+        this.storage.removeItem(this.getKey(key));
+    }
 
-      if (expires > -1 && Date.now() > expires) {
-        this.storage.removeItem(cacheKey);
+    /**
+     * Get a value out of the cache
+     *
+     * @template T
+     * @param {string} key
+     * @param {((value?: T) => T | undefined)} [validator=this.validator]
+     * @returns {(T | undefined)}
+     * @memberof StorageCache
+     */
+    public get<T = any>(
+        key: string,
+        validator: (value?: T) => T | undefined = this.validator,
+    ): T | undefined {
+        const cacheKey = this.getKey(key);
+        const cacheItem = this.storage.getItem(cacheKey);
 
-        return;
-      }
+        if (!isString(cacheItem)) {
+            return;
+        }
 
-      return validator(value);
-      // eslint-disable-next-line
+        try {
+            const {
+                expires,
+                value,
+            }: { expires: number; value: T } = JSON.parse(cacheItem);
+
+            if (!isFiniteNumber(expires)) {
+                return;
+            }
+
+            if (expires > -1 && Date.now() > expires) {
+                this.storage.removeItem(cacheKey);
+
+                return;
+            }
+
+            return validator(value);
+            // eslint-disable-next-line
     } catch (e) { }
-  }
-
-  /**
-   * put a value in the cache
-   *
-   * @param {string} key
-   * @param {*} value
-   * @param {(Date)} [expires]
-   * @returns
-   * @memberof StorageCache
-   */
-  public set(key: string, value: any, expires?: Date) {
-    let timestamp = -1;
-    const { expiration } = this.options;
-
-    if (isDate(expires)) {
-      timestamp = expires.getTime();
-    } else if (isFiniteNumber(expiration) && expiration > -1) {
-      timestamp = new Date().getTime() + expiration;
     }
 
-    const prefix = this.getKey(key);
+    /**
+     * put a value in the cache
+     *
+     * @param {string} key
+     * @param {*} value
+     * @param {(Date)} [expires]
+     * @returns
+     * @memberof StorageCache
+     */
+    public set(key: string, value: any, expires?: Date) {
+        let timestamp = -1;
+        const { expiration } = this.options;
 
-    this.storage.setItem(
-      prefix,
-      JSON.stringify({
-        value,
-        expires: timestamp,
-      }),
-    );
+        if (isDate(expires)) {
+            timestamp = expires.getTime();
+        } else if (isFiniteNumber(expiration) && expiration > -1) {
+            timestamp = new Date().getTime() + expiration;
+        }
 
-    return this.get(key);
-  }
+        const prefix = this.getKey(key);
 
-  protected validator<T>(value: T): T | undefined {
-    return value;
-  }
+        this.storage.setItem(
+            prefix,
+            JSON.stringify({
+                value,
+                expires: timestamp,
+            }),
+        );
+
+        return this.get(key);
+    }
+
+    protected validator<T>(value: T): T | undefined {
+        return value;
+    }
 }
 
 export default StorageCache;

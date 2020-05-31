@@ -1,4 +1,4 @@
-import { isArrayLike } from "./isArrayLike";
+import { isArrayLike } from './isArrayLike';
 
 /**
  * Checks if a value is an object with at least one key. You might ask "Why no isEmpty?" This is

@@ -1,4 +1,4 @@
-import { isPropertyDescriptor } from "./isPropertyDescriptor";
+import { isPropertyDescriptor } from './isPropertyDescriptor';
 
 /**
  * Checks if two values are the exact same property descriptors
@@ -8,10 +8,7 @@ import { isPropertyDescriptor } from "./isPropertyDescriptor";
  * @param {PropertyDescriptor} [b]
  * @returns {boolean}
  */
-export function isSamePropertyDescriptor(
-    a?: any,
-    b?: any,
-): boolean {
+export function isSamePropertyDescriptor(a?: any, b?: any): boolean {
     return (
         isPropertyDescriptor(a) &&
         isPropertyDescriptor(b) &&

@@ -1,4 +1,4 @@
-import { minutesToMillis } from "./minutesToMillis";
+import { minutesToMillis } from './minutesToMillis';
 
 /**
  * Converts hours into milliseconds

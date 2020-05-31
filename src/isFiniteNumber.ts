@@ -1,6 +1,6 @@
-import isObject from "./isObject";
-import { objString, TypeString } from "./helpers";
-import toNumber from "./toNumber";
+import { objString, TypeString } from './helpers';
+import isObject from './isObject';
+import toNumber from './toNumber';
 
 /**
  * Checks if a value is a finite number

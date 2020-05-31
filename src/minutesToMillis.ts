@@ -1,4 +1,4 @@
-import { secondsToMillis } from "./secondsToMillis";
+import { secondsToMillis } from './secondsToMillis';
 
 /**
  * Converts minutes into milliseconds

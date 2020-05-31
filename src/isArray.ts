@@ -1,5 +1,5 @@
-import { objString, TypeString } from "./helpers";
-import isFunction from "./isFunction";
+import { objString, TypeString } from './helpers';
+import isFunction from './isFunction';
 
 let isA: (value: any) => value is any[];
 
@@ -8,7 +8,7 @@ if (isFunction(Array.isArray)) {
 } else {
     isA = (value: any): value is any[] => {
         return objString(value) === TypeString.ARRAY;
-    }
+    };
 }
 
 /**

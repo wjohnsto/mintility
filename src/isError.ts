@@ -1,4 +1,4 @@
-import { objString, TypeString } from "./helpers";
+import { objString, TypeString } from './helpers';
 
 /**
  * Checks if a value is an Error

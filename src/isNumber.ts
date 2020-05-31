@@ -1,5 +1,5 @@
-import isObject from "./isObject";
-import { objString, TypeString } from "./helpers";
+import { objString, TypeString } from './helpers';
+import isObject from './isObject';
 
 /**
  * Checks if a value is a Number. Note that NaN is considered a number, and this method does not

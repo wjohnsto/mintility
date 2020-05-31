@@ -1,6 +1,6 @@
-import waitFor from "./waitFor";
+import waitFor from './waitFor';
 
-const scripts: { [key: string]: boolean; } = {};
+const scripts: { [key: string]: boolean } = {};
 
 /**
  * Dynamically loads scripts, and ensures a script hasn't already been loaded

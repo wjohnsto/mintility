@@ -6,7 +6,7 @@
  * @returns {(obj is null)}
  */
 export function isNull(value: any): value is null {
-    return value === null ;
+    return value === null;
 }
 
 export default isNull;
