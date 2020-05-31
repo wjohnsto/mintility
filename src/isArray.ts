@@ -1,6 +1,16 @@
 import { objString, TypeString } from "./helpers";
 import isFunction from "./isFunction";
 
+let isA: (value: any) => value is any[];
+
+if (isFunction(Array.isArray)) {
+    isA = Array.isArray;
+} else {
+    isA = (value: any): value is any[] => {
+        return objString(value) === TypeString.ARRAY;
+    }
+}
+
 /**
  * Checks if a value is an Array
  *
@@ -8,14 +18,5 @@ import isFunction from "./isFunction";
  * @param {*} value
  * @returns {(obj is any[])}
  */
-let isArray: (value: any) => value is any[];
-
-if (isFunction(Array.isArray)) {
-    isArray = Array.isArray;
-} else {
-    isArray = (value: any): value is any[] => {
-        return objString(value) === TypeString.ARRAY;
-    }
-}
-
+export const isArray = isA;
 export default isArray;

@@ -8,7 +8,7 @@ import isArray from "./isArray";
  * @param {*} value
  * @returns {boolean}
  */
-function isCyclic(value: any): boolean {
+export function isCyclic(value: any): boolean {
     const marked = new WeakMap();
 
     function detectCycle(obj: any) {

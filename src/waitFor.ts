@@ -8,7 +8,7 @@ import wait from "./wait";
  * @param {string} value
  * @returns {Promise<any>} When the value is found, it will be returned
  */
-async function waitFor(this: any, value: string): Promise<any> {
+export async function waitFor(this: any, value: string): Promise<any> {
     let win = this;
 
     while (!(win as any)[value]) {
