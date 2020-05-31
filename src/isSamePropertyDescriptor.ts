@@ -6,12 +6,12 @@ import { isPropertyDescriptor } from "./isPropertyDescriptor";
  * @export
  * @param {PropertyDescriptor} [a]
  * @param {PropertyDescriptor} [b]
- * @returns {(a is typeof b)}
+ * @returns {boolean}
  */
 export function isSamePropertyDescriptor(
     a?: any,
     b?: any,
-): a is typeof b {
+): boolean {
     return (
         isPropertyDescriptor(a) &&
         isPropertyDescriptor(b) &&
