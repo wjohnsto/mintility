@@ -46,7 +46,7 @@ function safeExtend(
                     if (marked.has(property)) {
                         define(destination, key, property);
                     } else {
-                        extend(deep, destination[key], property);
+                        safeExtend(deep, destination[key], property, marked);
                     }
 
                     return;
@@ -80,7 +80,7 @@ function safeExtend(
                     if (marked.has(property)) {
                         define(destination, key, property);
                     } else {
-                        extend(deep, destination[key], property);
+                        safeExtend(deep, destination[key], [property], marked);
                     }
 
                     Object.setPrototypeOf(
