@@ -21,7 +21,7 @@ test('StorageCache should accept a function key', () => {
 });
 
 describe('Cache methods', () => {
-    let defaultExpiration = 5;
+    let defaultExpiration = -1;
     let cache = new StorageCache({
         key: 'test-cache',
         expiration: defaultExpiration
