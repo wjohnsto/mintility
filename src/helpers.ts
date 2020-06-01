@@ -18,4 +18,4 @@ export const enum TypeString {
 
 export const objString = Object.prototype.toString.call.bind(
     Object.prototype.toString,
-);
+) as (values: any) => string;

@@ -11,6 +11,7 @@ export * from './isArrayLike';
 export * from './isArrayNotEmpty';
 export * from './isBigInt';
 export * from './isBoolean';
+export * from './isBrowser';
 export * from './isCyclic';
 export * from './isDate';
 export * from './isDocument';
@@ -74,6 +75,7 @@ import { isArrayLike } from './isArrayLike';
 import { isArrayNotEmpty } from './isArrayNotEmpty';
 import { isBigInt } from './isBigInt';
 import { isBoolean } from './isBoolean';
+import { isBrowser } from './isBrowser';
 import { isCyclic } from './isCyclic';
 import { isDate } from './isDate';
 import { isDocument } from './isDocument';
@@ -138,6 +140,7 @@ export default {
     isArrayNotEmpty,
     isBigInt,
     isBoolean,
+    isBrowser,
     isCyclic,
     isDate,
     isDocument,

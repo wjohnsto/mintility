@@ -2,11 +2,14 @@
  * This file provides a simple implementation of a cache using SessionStorage or LocalStorage
  */
 
+import isBrowser from './isBrowser';
 import isDate from './isDate';
 import isFiniteNumber from './isFiniteNumber';
 import isFunction from './isFunction';
-import isNil from './isNil';
 import isString from './isString';
+import isNumber from './isNumber';
+import isObject from './isObject';
+import isUndefined from './isUndefined';
 
 /**
  * The options for the StorageCache
@@ -18,7 +21,7 @@ export interface StorageCacheOptions {
     /**
      * The base key used to prepend to cache keys
      */
-    key: string | ((obj: any) => string);
+    key: string | ((key: string) => string);
 
     /**
      * What Storage to use, defaults to SessionStorage. You can use any object that fulfills the
@@ -30,6 +33,61 @@ export interface StorageCacheOptions {
      * A number of miliseconds to set as the default expiration of cache items. Defaults to 30 seconds.
      */
     expiration?: number;
+}
+
+let _storage: Storage;
+
+function simpleStorage(): Storage {
+    if (isObject(_storage)) {
+        return _storage;
+    }
+
+    let values: { key: string; value: string; }[] = [];
+    const storage: Storage = {
+        get length(): number {
+            return values.length;
+        },
+
+        clear(): void {
+            values = values.filter((value) => {
+                delete storage[value.key];
+                return false;
+            });
+        },
+        getItem(key: string): string | null {
+            return storage[key];
+        },
+        key(index: number): string | null {
+            return values[index].key || null;
+        },
+        removeItem(key: string): void {
+            const index = values.findIndex((value) => {
+                return value.key === key;
+            });
+
+            if (index < 0) {
+                return;
+            }
+            const item = values.splice(index, 1)[0];
+            delete storage[item.key];
+        },
+        setItem(key: string, value: string): void {
+            if (!isString(key)) {
+                key = String(key);
+            }
+
+            if (!isString(value)) {
+                value = String(value);
+            }
+
+            this[key] = value;
+            values.push({ key, value });
+        },
+    };
+
+    _storage = storage;
+
+    return _storage;
 }
 
 /**
@@ -46,21 +104,30 @@ export class StorageCache {
 
     private options: StorageCacheOptions;
 
-    constructor(options: StorageCacheOptions) {
+    constructor (options: StorageCacheOptions) {
         this.options = options;
-        this.storage = options.storage || window.sessionStorage;
+
+        if (isObject(options.storage)) {
+            this.storage = options.storage;
+        } else if (isBrowser()) {
+            this.storage = window.sessionStorage;
+        } else {
+            this.storage = simpleStorage();
+        }
 
         if (isFunction(options.key)) {
             this.getKey = options.key;
+        } else if (!(isString(options.key) || isNumber(options.key))) {
+            throw new Error('Cache must have a string or function key');
         } else {
             this.getKey = (key: string) => {
-                return `${options.key as string}${key}`;
+                return `${ options.key as string }${ key }`;
             };
         }
 
-        if (!options.expiration) {
+        if (!isNumber(options.expiration)) {
             // eslint-disable-next-line
-      options.expiration = 1000 * 30;
+            options.expiration = 1000 * 30;
         }
     }
 
@@ -72,7 +139,7 @@ export class StorageCache {
      * @memberof StorageCache
      */
     public exists(key: string): boolean {
-        return !isNil(this.get(key));
+        return !isUndefined(this.get(key));
     }
 
     /**
@@ -109,7 +176,7 @@ export class StorageCache {
             const {
                 expires,
                 value,
-            }: { expires: number; value: T } = JSON.parse(cacheItem);
+            }: { expires: number; value: T; } = JSON.parse(cacheItem);
 
             if (!isFiniteNumber(expires)) {
                 return;
@@ -123,7 +190,7 @@ export class StorageCache {
 
             return validator(value);
             // eslint-disable-next-line
-    } catch (e) { }
+        } catch (e) { }
     }
 
     /**
@@ -136,6 +203,10 @@ export class StorageCache {
      * @memberof StorageCache
      */
     public set(key: string, value: any, expires?: Date) {
+        if (isUndefined(value)) {
+            return value;
+        }
+
         let timestamp = -1;
         const { expiration } = this.options;
 
