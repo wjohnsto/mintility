@@ -165,6 +165,10 @@ export class StorageCache {
         key: string,
         validator: (value?: T) => T | undefined = this.validator,
     ): T | undefined {
+        if (!(isString(key) || isNumber(key))) {
+            return;
+        }
+
         const cacheKey = this.getKey(key);
         const cacheItem = this.storage.getItem(cacheKey);
 
@@ -205,6 +209,8 @@ export class StorageCache {
     public set(key: string, value: any, expires?: Date) {
         if (isUndefined(value)) {
             return value;
+        } else if (!(isString(key) || isNumber(key))) {
+            return;
         }
 
         let timestamp = -1;

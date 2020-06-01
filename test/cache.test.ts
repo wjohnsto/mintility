@@ -53,7 +53,31 @@ describe('Cache methods', () => {
         expect(cached).toBeUndefined();
     });
 
+    test('StorageCache should allow setting with a number key', () => {
+        const value = { key: 2 };
+        cache.set(2 as any, value);
+
+        expect(cache.exists(2 as any)).toBe(true);
+        expect(cache.get(2 as any)).toStrictEqual(value);
+    });
+
+    test('StorageCache should not allow setting with a non-string or non-number key', () => {
+        const value = { key: 2 };
+        const cached = cache.set({} as any, value);
+
+        expect(cache.exists({} as any)).toBe(false);
+        expect(cache.get({} as any)).toBeUndefined();
+        expect(cached).toBeUndefined();
+    });
+
     test('StorageCache should allow getting items', () => {
+        const value = { key: 2 };
+        cache.set('test', value);
+
+        expect(cache.get('test')).toStrictEqual(value);
+    });
+
+    test('StorageCache should only get with string keys', () => {
         const value = { key: 2 };
         cache.set('test', value);
 
