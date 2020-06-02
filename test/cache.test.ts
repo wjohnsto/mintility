@@ -21,17 +21,19 @@ test('StorageCache should accept a function key', () => {
 });
 
 describe('Cache methods', () => {
-    let defaultExpiration = -1;
-    let cache = new StorageCache({
-        key: 'test-cache',
-        expiration: defaultExpiration
-    });
+    let defaultExpiration = 10;
+    let count = 0;
 
-    beforeEach(() => {
-        cache.delete('test')
-    });
+    function getCache() {
+        count += 1;
+        return new StorageCache({
+            key: `${count}`,
+            expiration: defaultExpiration
+        });
+    }
 
     test('StorageCache should allow setting items', () => {
+        const cache = getCache();
         const value = { key: 2 };
         const cached = cache.set('test', value);
 
@@ -40,6 +42,7 @@ describe('Cache methods', () => {
     });
 
     test('StorageCache should allow setting to null', () => {
+        const cache = getCache();
         const cached = cache.set('test', null);
 
         expect(cache.exists('test')).toBe(true);
@@ -47,6 +50,7 @@ describe('Cache methods', () => {
     });
 
     test('StorageCache should not allow setting to undefined', () => {
+        const cache = getCache();
         const cached = cache.set('test', undefined);
 
         expect(cache.exists('test')).toBe(false);
@@ -54,6 +58,7 @@ describe('Cache methods', () => {
     });
 
     test('StorageCache should allow setting with a number key', () => {
+        const cache = getCache();
         const value = { key: 2 };
         cache.set(2 as any, value);
 
@@ -62,6 +67,7 @@ describe('Cache methods', () => {
     });
 
     test('StorageCache should not allow setting with a non-string or non-number key', () => {
+        const cache = getCache();
         const value = { key: 2 };
         const cached = cache.set({} as any, value);
 
@@ -71,6 +77,7 @@ describe('Cache methods', () => {
     });
 
     test('StorageCache should allow getting items', () => {
+        const cache = getCache();
         const value = { key: 2 };
         cache.set('test', value);
 
@@ -78,6 +85,7 @@ describe('Cache methods', () => {
     });
 
     test('StorageCache should only get with string keys', () => {
+        const cache = getCache();
         const value = { key: 2 };
         cache.set('test', value);
 
@@ -85,6 +93,7 @@ describe('Cache methods', () => {
     });
 
     test('StorageCache should allow deleting items', () => {
+        const cache = getCache();
         const value = { key: 2 };
         cache.set('test', value);
         cache.delete('test');
@@ -94,6 +103,7 @@ describe('Cache methods', () => {
     });
 
     test('StorageCache should expire items', (done) => {
+        const cache = getCache();
         const value = { key: 2 };
         cache.set('test', value);
 
@@ -101,10 +111,11 @@ describe('Cache methods', () => {
             expect(cache.exists('test')).toBe(false);
             expect(cache.get('test')).toBeUndefined();
             done();
-        }, defaultExpiration);
+        }, defaultExpiration + 10);
     });
 
     test('StorageCache should allow overriding expiration', (done) => {
+        const cache = getCache();
         const value = { key: 2 };
         const timeout = defaultExpiration + 200;
         cache.set('test', value, new Date(Date.now() + timeout));
