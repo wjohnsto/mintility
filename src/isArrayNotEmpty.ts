@@ -10,9 +10,9 @@ import { isArrayLike } from './isArrayLike';
  *
  * @export
  * @param {any} value
- * @returns {value is ArrayLike<any>}
+ * @returns {boolean}
  */
-export function isArrayNotEmpty(value: any): value is ArrayLike<any> {
+export function isArrayNotEmpty(value: any): boolean {
     return isArrayLike(value) && value.length > 0;
 }
 

@@ -114,7 +114,7 @@ export function extend(
         return destination;
     }
 
-    if (!isArrayNotEmpty(sources)) {
+    if (isArray(sources) && !isArrayNotEmpty(sources)) {
         sources.push(destination);
     }
 
