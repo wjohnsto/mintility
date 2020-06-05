@@ -9,11 +9,10 @@ import { isArrayLike } from './isArrayLike';
  * make sure you are explicitly getting what you ask for, and to aid in TypeScript type safety.
  *
  * @export
- * @template T
- * @param {T[]} [value]
- * @returns {value is [T, ...T[]]}
+ * @param {any} value
+ * @returns {value is ArrayLike<any>}
  */
-export function isArrayNotEmpty<T = any>(value?: T[]): value is [T, ...T[]] {
+export function isArrayNotEmpty(value: any): value is ArrayLike<any> {
     return isArrayLike(value) && value.length > 0;
 }
 
