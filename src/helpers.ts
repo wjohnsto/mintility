@@ -19,3 +19,7 @@ export const enum TypeString {
 export const objString = Object.prototype.toString.call.bind(
     Object.prototype.toString,
 ) as (values: any) => string;
+
+export function instanceOf<T extends new (...args: any[]) => any>(value: any, Type: T): value is InstanceType<T> {
+    return value != null && value instanceof Type;
+}

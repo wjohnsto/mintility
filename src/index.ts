@@ -12,6 +12,7 @@ export * from './isArrayNotEmpty';
 export * from './isBigInt';
 export * from './isBoolean';
 export * from './isBrowser';
+export * from './isBuffer';
 export * from './isCyclic';
 export * from './isDate';
 export * from './isDocument';
@@ -38,12 +39,14 @@ export * from './isPrimitive';
 export * from './isPromise';
 export * from './isPromiseLike';
 export * from './isPropertyDescriptor';
+export * from './isReferenceError';
 export * from './isRegExp';
 export * from './isSamePropertyDescriptor';
 export * from './isSet';
 export * from './isString';
 export * from './isSymbol';
 export * from './isTrue';
+export * from './isTypeError';
 export * from './isUndefined';
 export * from './isWeakMap';
 export * from './isWeakSet';
@@ -76,6 +79,7 @@ import { isArrayNotEmpty } from './isArrayNotEmpty';
 import { isBigInt } from './isBigInt';
 import { isBoolean } from './isBoolean';
 import { isBrowser } from './isBrowser';
+import { isBuffer } from './isBuffer';
 import { isCyclic } from './isCyclic';
 import { isDate } from './isDate';
 import { isDocument } from './isDocument';
@@ -103,11 +107,13 @@ import { isPromise } from './isPromise';
 import { isPromiseLike } from './isPromiseLike';
 import { isPropertyDescriptor } from './isPropertyDescriptor';
 import { isRegExp } from './isRegExp';
+import { isReferenceError } from './isReferenceError';
 import { isSamePropertyDescriptor } from './isSamePropertyDescriptor';
 import { isSet } from './isSet';
 import { isString } from './isString';
 import { isSymbol } from './isSymbol';
 import { isTrue } from './isTrue';
+import { isTypeError } from './isTypeError';
 import { isUndefined } from './isUndefined';
 import { isWeakMap } from './isWeakMap';
 import { isWeakSet } from './isWeakSet';
@@ -141,6 +147,7 @@ export default {
     isBigInt,
     isBoolean,
     isBrowser,
+    isBuffer,
     isCyclic,
     isDate,
     isDocument,
@@ -168,11 +175,13 @@ export default {
     isPromiseLike,
     isPropertyDescriptor,
     isRegExp,
+    isReferenceError,
     isSamePropertyDescriptor,
     isSet,
     isString,
     isSymbol,
     isTrue,
+    isTypeError,
     isUndefined,
     isWeakMap,
     isWeakSet,
