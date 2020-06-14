@@ -57,6 +57,7 @@ export * from './mapAsyncInOrder';
 export * from './minutesToMillis';
 export * from './noop';
 export * from './numbersEqual';
+export * from './path';
 export * from './secondsToMillis';
 export * from './shallowClone';
 export * from './stripNilProperties';
@@ -125,6 +126,7 @@ import { mapAsyncInOrder } from './mapAsyncInOrder';
 import { minutesToMillis } from './minutesToMillis';
 import { noop } from './noop';
 import { numbersEqual } from './numbersEqual';
+import { path } from './path';
 import { secondsToMillis } from './secondsToMillis';
 import { shallowClone } from './shallowClone';
 import { stripNilProperties } from './stripNilProperties';
@@ -194,6 +196,7 @@ export default {
     minutesToMillis,
     noop,
     numbersEqual,
+    path,
     secondsToMillis,
     shallowClone,
     stripNilProperties,
