@@ -8,13 +8,13 @@ import isArray from './isArray';
  * @template T
  * @param {(value: T, key: any, obj: any) => Promise<boolean>} iterator
  * @param {T[]} obj
- * @param {*} [context]
+ * @param {*} [thisArg]
  * @returns {Promise<T[]>}
  */
 export async function filterAsync<T>(
     iterator: (value: T, key: any, obj: any) => Promise<boolean>,
     obj: T[],
-    context?: any,
+    thisArg?: any,
 ): Promise<T[]> {
     // eslint-disable-next-line
     return new Promise<T[]>(async (resolve, reject) => {
@@ -27,7 +27,7 @@ export async function filterAsync<T>(
         try {
             for (let i = 0; i < obj.length; i += 1) {
                 // eslint-disable-next-line
-                if ((await Promise.resolve(iterator(obj[i], i, obj))) === true) {
+                if ((await Promise.resolve(iterator.call(thisArg, obj[i], i, obj))) === true) {
                     newObj.push(obj[i]);
                 }
             }
