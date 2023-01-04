@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
     preset: 'ts-jest',
     testEnvironment: 'node',
     testRegex: '(/__tests__/.*|\\.(test|spec))\\.ts$',
@@ -16,3 +16,5 @@ module.exports = {
         }
     }
 };
+
+export default config;
