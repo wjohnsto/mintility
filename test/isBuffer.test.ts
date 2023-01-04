@@ -1,8 +1,13 @@
-import identity from '../src/identity';
+import isBuffer from '../src/isBuffer';
 
-test('identity should return what you pass to it', () => {
-    expect(identity()).toBeUndefined();
-    expect(identity(undefined)).toBeUndefined();
-    expect(identity(null)).toBeNull();
-    expect(identity(2)).toBe(2);
+test('isBuffer should return true for Buffers', () => {
+    expect(isBuffer(Buffer.alloc(1))).toBe(true);
+    expect(isBuffer(Buffer.from('abc'))).toBe(true);
+});
+
+test('isBuffer should return false for non-Buffers', () => {
+    expect(isBuffer(undefined)).toBe(false);
+    expect(isBuffer(null)).toBe(false);
+    expect(isBuffer(0)).toBe(false);
+    expect(isBuffer('')).toBe(false);
 });

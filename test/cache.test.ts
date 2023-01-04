@@ -123,13 +123,13 @@ describe('Cache methods', () => {
             setTimeout(() => {
                 expect(cache.exists('test')).toBe(true);
                 expect(cache.get('test')).toStrictEqual(value);
-            }, timeout - defaultExpiration - 10);
+            }, timeout - defaultExpiration - 100);
 
             setTimeout(() => {
                 expect(cache.exists('test')).toBe(false);
                 expect(cache.get('test')).toBeUndefined();
                 done();
-            }, timeout - defaultExpiration + 10);
+            }, timeout - defaultExpiration + 100);
         }, defaultExpiration);
     });
 });

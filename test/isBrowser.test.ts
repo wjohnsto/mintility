@@ -1,8 +1,8 @@
-import identity from '../src/identity';
+import isBrowser from '../src/isBrowser';
 
-test('identity should return what you pass to it', () => {
-    expect(identity()).toBeUndefined();
-    expect(identity(undefined)).toBeUndefined();
-    expect(identity(null)).toBeNull();
-    expect(identity(2)).toBe(2);
+const root = this;
+
+test('isBrowser should return false', () => {
+    expect(isBrowser()).toBe(false);
+    expect(isBrowser.call(root)).toBe(false);
 });
