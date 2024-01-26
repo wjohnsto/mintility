@@ -21,7 +21,7 @@ export async function mapAsync<T, TResult>(
         return Promise.resolve(obj);
     }
 
-    return Promise.all<TResult>(obj.map(iterator));
+    return Promise.all<TResult>(obj.map(iterator, context));
 }
 
 export default mapAsync;

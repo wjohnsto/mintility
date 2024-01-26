@@ -42,7 +42,7 @@ function simpleStorage(): Storage {
         return _storage;
     }
 
-    let values: { key: string; value: string; }[] = [];
+    let values: { key: string; value: string }[] = [];
     const storage: Storage = {
         get length(): number {
             return values.length;
@@ -104,7 +104,7 @@ export class StorageCache {
 
     private options: StorageCacheOptions;
 
-    constructor (options: StorageCacheOptions) {
+    constructor(options: StorageCacheOptions) {
         this.options = options;
 
         if (isObject(options.storage)) {
@@ -121,7 +121,7 @@ export class StorageCache {
             throw new Error('Cache must have a string or function key');
         } else {
             this.getKey = (key: string) => {
-                return `${ options.key as string }${ key }`;
+                return `${options.key as string}${key}`;
             };
         }
 
@@ -177,10 +177,8 @@ export class StorageCache {
         }
 
         try {
-            const {
-                expires,
-                value,
-            }: { expires: number; value: T; } = JSON.parse(cacheItem);
+            const { expires, value }: { expires: number; value: T } =
+                JSON.parse(cacheItem);
 
             if (!isFiniteNumber(expires)) {
                 return;
