@@ -46,11 +46,12 @@ export function forEach(
     let key: string;
     let length: number;
 
-    if (isFunction(obj.forEach)) {
-        obj.forEach(iterator, context);
+    if (isFunction((obj as Array<any>).forEach)) {
+        (obj as Array<any>).forEach(iterator, context);
 
         return;
     }
+
     if (isArrayLike(obj)) {
         length = obj.length;
         for (i = 0; i < length; i += 1) {

@@ -14,7 +14,7 @@ export function path(list: (string | number)[], obj: any) {
     let idx: number = 0;
     let p: string | number = 0;
 
-    while(idx < list.length) {
+    while (idx < list.length) {
         if (isNil(value)) {
             return;
         }

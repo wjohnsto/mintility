@@ -12,6 +12,7 @@ export function stripNilProperties(obj?: any): any {
         return obj;
     }
     const ret: any = {};
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
     Object.keys(obj).forEach((key) => {
         if (isNil(obj[key])) {
             return;
